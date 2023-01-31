@@ -79,4 +79,4 @@ type User struct {
 
 ## Credits
 
-The code was pulled from this excellent [Stack Overflow comment](https://stackoverflow.com/a/33072822), I just decided to package it up for use in my projects.
+The inspiration and most implementation was pulled from this excellent [Stack Overflow comment](https://stackoverflow.com/a/33072822).
