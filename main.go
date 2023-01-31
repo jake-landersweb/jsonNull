@@ -221,3 +221,37 @@ func (v *String) UnmarshalJSON(data []byte) error {
 	}
 	return nil
 }
+
+type Json struct {
+	sql.NullString
+}
+
+func (v Json) MarshalJSON() ([]byte, error) {
+	if v.Valid {
+		// unmarshal as map
+		var m map[string]any
+		err := json.Unmarshal([]byte(v.String), &m)
+		if err != nil {
+			return nil, err
+		}
+		// remarshal map to bytes
+		return json.Marshal(&m)
+	} else {
+		return json.Marshal(nil)
+	}
+}
+
+func (v *Json) UnmarshalJSON(data []byte) error {
+	// Unmarshalling into a pointer will let us detect null
+	var x *string
+	if err := json.Unmarshal(data, &x); err != nil {
+		return err
+	}
+	if x != nil {
+		v.Valid = true
+		v.String = *x
+	} else {
+		v.Valid = false
+	}
+	return nil
+}

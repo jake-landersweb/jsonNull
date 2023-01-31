@@ -37,7 +37,9 @@ Then the resulting json would look like this:
 }
 ```
 
-While this is not necessarily the worst thing ever, I like my json to be as flat as possible. This package solves that by giving types wrapped around the base `sql.Null` types that implement custom json marshal functions. 
+While this is not necessarily the worst thing ever, I like my json to be as flat as possible. This package solves that by giving types wrapped around the base `sql.Null` types that implement custom json marshal functions.
+
+One thing to note is the inclusion of the `Json` datatype. This allows for the marshalling and unmarshalling of the json datatype stored in MySQL. If you treat the json datatype of a regular string, then when encoding on object that uses this type into json will result in a 'double' encoding, causing extra '"' and "\" to be present.
 
 ## Usage
 
@@ -73,7 +75,7 @@ type User struct {
 - `Int32`
 - `Int64`
 - `String`
-
+- `Json` (custom datatype)
 
 ## Credits
 
