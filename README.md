@@ -1,5 +1,7 @@
 # Go Json Null
 
+## About
+
 **A quick and dirty package for handling SQL and JSON typed values inside of Go.**
 
 One of the problems with working with SQL inside of Go is the fact that columns can be null. While this is not a huge problem and can be easily worked around with using sql types such as `sql.NullString` or `sql.NullInt32`, it becomes more difficult to use these raw types when serializing into json.
@@ -36,6 +38,42 @@ Then the resulting json would look like this:
 ```
 
 While this is not necessarily the worst thing ever, I like my json to be as flat as possible. This package solves that by giving types wrapped around the base `sql.Null` types that implement custom json marshal functions. 
+
+## Usage
+
+```shell
+$ go get github.com/jake-landersweb/jsonNull
+```
+
+Change:
+
+```go
+type User struct {
+    Name sql.NullString
+    Date sql.NullTime
+}
+```
+
+To:
+
+```go
+type User struct {
+    Name jsonNull.String
+    Date jsonNull.DateTime
+}
+```
+
+## Available Types
+
+- `Bool`
+- `Byte`
+- `DateTime`
+- `Float64`
+- `Int16`
+- `Int32`
+- `Int64`
+- `String`
+
 
 ## Credits
 
