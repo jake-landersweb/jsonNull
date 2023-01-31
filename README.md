@@ -75,7 +75,7 @@ type User struct {
 - `Int32`
 - `Int64`
 - `String`
-- `Json` (custom datatype)
+- `Json`
 
 ## Credits
 
